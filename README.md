@@ -43,9 +43,8 @@
 
 ### 📸 Screenshots
 <div align="center"> 
-  ![image](https://github.com/user-attachments/assets/d5d2db93-9deb-44e2-a1f8-d49e1694b6d7)
-
-  <img src="/screenshots/dashboard.png" width="45%" alt="Dashboard" />
+ <h3> Please Click On this link to see Screenshot</h3>
+  ![Description of the image](https://github.com/user-attachments/assets/d5d2db93-9deb-44e2-a1f8-d49e1694b6d7)
 </div>
 
 ### 🛠️ Tech Stack
