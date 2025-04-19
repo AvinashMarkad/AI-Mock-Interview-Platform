@@ -1,6 +1,3 @@
-Here's a professional README.md file for your AI Mock Interview Platform:
-
-```markdown
 # AI Mock Interview Platform
 
 <div align="center">
@@ -34,70 +31,3 @@ Here's a professional README.md file for your AI Mock Interview Platform:
 1. Clone the repository
    ```bash
    git clone https://github.com/AvinashMarkad/AI-Mock-Interview-Platform.git
-   ```
-2. Install dependencies
-   ```bash
-   cd AI-Mock-Interview-Platform
-   npm install
-   ```
-3. Set up environment variables
-   ```bash
-   cp .env.example .env.local
-   ```
-4. Start the development server
-   ```bash
-   npm run dev
-   ```
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="/screenshots/auth-screen.png" width="45%" alt="Authentication Screen" />
-  <img src="/screenshots/dashboard.png" width="45%" alt="Dashboard" />
-</div>
-
-## 🛠️ Tech Stack
-
-- **Frontend**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Authentication**: Firebase Auth
-- **AI Integration**: Vapi.ai
-- **State Management**: React Hook Form + Zod
-- **UI Components**: Shadcn/ui
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<div align="center">
-  Made with ❤️ by Avinash Markad
-</div>
-```
-
-Key professional elements included:
-1. Clean header with badges
-2. Feature highlights
-3. Clear installation instructions
-4. Screenshot section (add your actual screenshots)
-5. Tech stack breakdown
-6. Contribution guidelines
-7. License information
-8. Professional footer
-
-To use this:
-1. Create a `screenshots` directory and add your actual screenshots
-2. Update the feature list with your actual features
-3. Modify the tech stack if needed
-4. Add any additional sections specific to your project
-
