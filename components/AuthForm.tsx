@@ -1,37 +1,32 @@
 "use client";
 
-import { z } from "zod";
-import Link from "next/link";
-import Image from "next/image";
-import { toast } from "sonner";
-import { auth } from "@/firebase/client";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
-import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import Image from "next/image";
+import FormField from "./FormFeild";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import React from "react";
+import Link from "next/link";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-import { signIn, signUp } from "@/lib/actions/auth.action";
-import FormField from "./FormField";
+type FormType = "sign-in" | "sign-up";
 
-const authFormSchema = (type: FormType) => {
+const authFormSchema = (types: FormType) => {
   return z.object({
-    name: type === "sign-up" ? z.string().min(3) : z.string().optional(),
+    name:
+      types === "sign-up" ? z.string().min(3).max(50) : z.string().optional(),
     email: z.string().email(),
-    password: z.string().min(3),
+    password: z.string().min(8).max(50),
   });
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
-
   const formSchema = authFormSchema(type);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,84 +36,60 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  async function onSubmit() {
     try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       if (type === "sign-up") {
-        const { name, email, password } = data;
-
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        const result = await signUp({
-          uid: userCredential.user.uid,
-          name: name!,
-          email,
-          password,
+        toast.success("Account created successfully!", {
+          duration: 3000,
+          position: "top-center",
         });
-
-        if (!result.success) {
-          toast.error(result.message);
-          return;
-        }
-
-        toast.success("Account created successfully. Please sign in.");
-        router.push("/sign-in");
+        // Wait for toast to show before navigating
+        setTimeout(() => router.push("/sign-in"), 1000);
       } else {
-        const { email, password } = data;
-
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        const idToken = await userCredential.user.getIdToken();
-        if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
-          return;
-        }
-
-        await signIn({
-          email,
-          idToken,
+        toast.success("Signed in successfully!", {
+          duration: 3000,
+          position: "top-center",
         });
-
-        toast.success("Signed in successfully.");
-        router.push("/");
+        setTimeout(() => router.push("/"), 1000);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(`There was an error: ${error}`);
+      toast.error("An error occurred. Please try again.", {
+        duration: 3000,
+        position: "top-center",
+      });
+      console.error("Error submitting form:", error);
     }
-  };
+  }
 
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="card-border lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
-          <h2 className="text-primary-100">PrepWise</h2>
+    <div className="card-border lg:min-w-[500px]">
+      <div className="flex flex-col gap-6 card p-10">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Image src="/logo.svg" alt="logo" width={38} height={32} />
+            <h2 className="text-primary-100 text-2xl font-bold">PrepWise</h2>
+          </div>
+          <h3 className="text-muted-foreground">
+            Practice Job Interviews with AI
+          </h3>
         </div>
-
-        <h3>Practice job interviews with AI</h3>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 mt-4 form"
+            className="space-y-6 w-full"
           >
             {!isSignIn && (
               <FormField
                 control={form.control}
                 name="name"
-                label="Name"
+                label="Username"
                 placeholder="Your Name"
-                type="text"
               />
             )}
 
@@ -134,23 +105,23 @@ const AuthForm = ({ type }: { type: FormType }) => {
               control={form.control}
               name="password"
               label="Password"
-              placeholder="Enter your password"
+              placeholder="Enter Password"
               type="password"
             />
 
-            <Button className="btn" type="submit">
-              {isSignIn ? "Sign In" : "Create an Account"}
+            <Button className="w-full" type="submit" size="lg">
+              {isSignIn ? "Sign In" : "Sign Up"}
             </Button>
           </form>
         </Form>
 
-        <p className="text-center">
-          {isSignIn ? "No account yet?" : "Have an account already?"}
+        <p className="text-center text-sm mt-4">
+          {isSignIn ? "Don't have an account?" : "Already have an account?"}{" "}
           <Link
-            href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-bold text-user-primary ml-1"
+            href={isSignIn ? "/sign-up" : "/sign-in"}
+            className="font-bold text-primary hover:underline"
           >
-            {!isSignIn ? "Sign In" : "Sign Up"}
+            {isSignIn ? "Sign Up" : "Sign In"}
           </Link>
         </p>
       </div>
