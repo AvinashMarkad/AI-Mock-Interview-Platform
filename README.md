@@ -31,3 +31,38 @@
 1. Clone the repository
    ```bash
    git clone https://github.com/AvinashMarkad/AI-Mock-Interview-Platform.git
+   
+2. Install dependencies
+    ```bash
+    cd AI-Mock-Interview-Platform
+    npm install
+
+3. Start the development server
+    ```bash
+    npm run dev
+
+### 📸 Screenshots
+<div align="center"> 
+  ![image](https://github.com/user-attachments/assets/d5d2db93-9deb-44e2-a1f8-d49e1694b6d7)
+
+  <img src="/screenshots/dashboard.png" width="45%" alt="Dashboard" />
+</div>
+
+### 🛠️ Tech Stack
+Frontend: Next.js 14 (App Router)
+
+Styling: Tailwind CSS
+
+Authentication: Firebase Auth
+
+AI Integration: Vapi.ai
+
+State Management: React Hook Form + Zod
+
+UI Components: Shadcn/ui
+
+----------------------------------------------------------------------------------------
+
+<div align="center"> Made with ❤️ by Avinash Markad </div>
+
+----------------------------------------------------------------------------------------
