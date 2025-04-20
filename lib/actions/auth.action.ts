@@ -5,6 +5,7 @@ import { auth, db } from "@/firebase/admin";
 import { User } from "firebase/auth";
 import { cookies } from "next/headers";
 
+
 // Session duration (1 week)
 const SESSION_DURATION = 60 * 60 * 24 * 7;
 
