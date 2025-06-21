@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { dummyInterviews } from "@/constants";
-// import { Inter } from "next/font/google";
 import InterviewCard from "@/components/InterviewCard";
 
 const Page = () => {
@@ -15,7 +14,7 @@ const Page = () => {
             Practice on Real Interview Quitions & get instant feedback
           </p>
           <Button className="btn-primary max-sm:w-full">
-            <Link href="/interview">Start an Interview</Link>
+            <Link href="/dashboard/interview">Start an Interview</Link>
           </Button>
         </div>
         <Image
@@ -30,7 +29,12 @@ const Page = () => {
         <h2>Your Interviews</h2>
         <div className="interviews-section">
           {dummyInterviews.map((interview) => (
-            <InterviewCard {...interview} key={interview.id} />
+            <InterviewCard
+              {...interview}
+              interviewId={interview.id}
+              techStack={interview.techstack}
+              key={interview.id}
+            />
           ))}
         </div>
       </section>
@@ -38,7 +42,12 @@ const Page = () => {
         <h2>Take an Interview</h2>
         <div className="interviews-section">
           {dummyInterviews.map((interview) => (
-            <InterviewCard {...interview} key={interview.id} />
+            <InterviewCard
+              {...interview}
+              interviewId={interview.id}
+              techStack={interview.techstack}
+              key={interview.id}
+            />
           ))}
 
           {/* <p>You haven&apos;t taken any interviews yet</p> */}
